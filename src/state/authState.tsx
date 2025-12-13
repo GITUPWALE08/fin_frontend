@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const logout = async () => {
-     await fetch("http://localhost:5000/logout", { credentials: "include" });
+     await fetch("/logout", { credentials: "include" });
      setUser(null);
   };
 
