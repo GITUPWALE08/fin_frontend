@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+
+/* small helper for container background */
+body { background-color: #070617; }

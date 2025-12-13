@@ -1,0 +1,7 @@
+import { get, post } from "../lib/api";
+
+export const getPrice = (symbol: string) =>
+  get(`/stocks/price?symbol=${symbol}`);
+
+export const buyStock = (symbol: string, shares: number, password: string) =>
+  post("/trading/buy", { symbol, shares, password });
