@@ -1,3 +1,4 @@
+// src/state/AuthContext.tsx
 import {
   createContext,
   useContext,
@@ -5,36 +6,37 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
-// IMPORT YOUR API HELPER
-import { get, post } from "../lib/api";
 
 type AuthContextType = {
   user: { id: number; username: string } | null;
   setUser: (u: AuthContextType["user"]) => void;
   logout: () => void;
-  loading: boolean;
+  loading: boolean; // <--- ADD THIS
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<AuthContextType["user"]>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // <--- Start as true
 
+  // Check for session when app loads
   useEffect(() => {
     const checkUser = async () => {
       try {
-        // USE 'get' INSTEAD OF 'fetch'
-        // This automatically uses the correct Vercel/Render URL
-        const data = await get("/current_user");
+        const res = await fetch("/current_user", {
+            credentials: "include" // <--- CRITICAL: Sends the cookie to backend
+        });
+        
+        const data = await res.json();
         
         if (data.user) {
           setUser(data.user);
         }
       } catch (error) {
-        // console.log("Not logged in");
+        console.log("Not logged in");
       } finally {
-        setLoading(false);
+        setLoading(false); // <--- Finish loading regardless of result
       }
     };
 
@@ -42,12 +44,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const logout = async () => {
-     try {
-       // USE 'post' helper
-       await post("/logout");
-     } catch (e) {
-       console.error(e);
-     }
+     await fetch("/logout", { credentials: "include" });
      setUser(null);
   };
 

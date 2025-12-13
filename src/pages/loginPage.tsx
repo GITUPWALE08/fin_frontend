@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../layouts/layout";
 import type { JSX } from "react";
 import { useAuth } from "../state/authState";
+import { post } from "../lib/api";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage(): JSX.Element {
@@ -12,44 +13,34 @@ export default function LoginPage(): JSX.Element {
   const [error, setError] = useState<string | null>(null);
   const nav = useNavigate();
 
-  const submit = async (e: React.FormEvent) => {
+const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
 
     try {
-      // FIX: Use relative path (Proxy) instead of absolute URL
-      const res = await fetch("/login", {
-        method: "POST",
-        credentials: "include", // Required for cookies
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
+      // USE 'post' helper from api.tsx
+      const data = await post("/login", { username, password });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.error || "Invalid login credentials");
-      }
-
-      // Save authenticated user
-      // Ensure these keys match exactly what your Python 'login' returns
+      // The API helper throws an error automatically if status is not 200
+      // so we don't need "if (!res.ok)" checks here.
+      
       const userObj = {
           id: data.user_id,
           username: data.user_name
       };
       
       setUser(userObj);
-      
-      // Navigate to dashboard
       nav("/");
 
     } catch (err: any) {
-      setError(err.message ?? "Login failed");
+      // Axios errors are stored in err.response.data.error
+      const msg = err.response?.data?.error || err.message || "Login failed";
+      setError(msg);
     } finally {
       setLoading(false);
     }
-  };
+};
 
   return (
     <Layout>

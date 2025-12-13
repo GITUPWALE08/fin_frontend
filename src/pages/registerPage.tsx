@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../layouts/layout";
+import {post} from "../lib/api";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -20,26 +21,19 @@ export default function Register() {
     setLoading(true);
 
     try {
-      const res = await fetch("/register", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, confirmation }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Unable to register");
-      } else {
-        window.location.href = "/signin";
-      }
-    } catch {
-      setError("Network error. Please try again.");
+      // USE 'post' helper
+      await post("/register", { username, password, confirmation });
+      
+      // If successful, redirect
+      window.location.href = "/signin";
+      
+    } catch (err: any) {
+      const msg = err.response?.data?.error || "Unable to register";
+      setError(msg);
     }
 
     setLoading(false);
-  };
+};
 
   return (
     <Layout>
