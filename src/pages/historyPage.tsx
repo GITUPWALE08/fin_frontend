@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../layouts/layout";
 import type { JSX } from "react";
 import { getHistory } from "../services/user";
