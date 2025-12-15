@@ -45,6 +45,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
      try {
        // USE 'post' helper
        await post("/logout");
+
+       window.location.href = "/";
      } catch (e) {
        console.error(e);
      }
