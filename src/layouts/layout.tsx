@@ -33,7 +33,7 @@ export default function Layout({ children }: PropsWithChildren<{}>) {
                 Get Quote
               </button>
             <a className="text-slate-300 hover:text-white transition" href="/transactions">history</a>
-            <a className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium hover:bg-indigo-500 transition" href="/logout">{user ? "sign out" : "Sign Up"}</a>
+            <a className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium hover:bg-indigo-500 transition" href={user ? "/logout" : "/signup"}>{user ? "sign out" : "Sign Up"}</a>
           </nav>
         </div>
       </header>
