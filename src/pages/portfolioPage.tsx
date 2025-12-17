@@ -6,7 +6,7 @@ import QuoteModal from "../components/quoteModalPage";
 
 // Types matching your Flask JSON response
 type StockPosition = {
-  stock: string;
+  symbol: string;
   name: string;
   shares: number;
   price: number;
@@ -173,7 +173,7 @@ export default function PortfolioPage() {
                 ) : (
                   data.portfolio.map((stock, i) => (
                     <tr key={i} className="hover:bg-slate-800/40 transition group">
-                      <td className="px-6 py-4 text-white font-bold">{stock.stock}</td>
+                      <td className="px-6 py-4 text-white font-bold">{stock.symbol}</td>
                       <td className="px-6 py-4 text-slate-300">{stock.name}</td>
                       <td className="px-6 py-4 text-right text-slate-300 font-mono">{stock.shares}</td>
                       <td className="px-6 py-4 text-right text-slate-300 font-mono">
