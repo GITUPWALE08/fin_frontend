@@ -22,7 +22,7 @@ export default function Layout({ children }: PropsWithChildren<{}>) {
           </div>
 
           <nav className="hidden md:flex items-center gap-4">
-            <a className="text-slate-300 hover:text-white transition" href="/">Home</a>
+            <a className="text-slate-300 hover:text-white transition" href={user ? "/" : "/welcome"}>Home</a>
             <a className="text-slate-300 hover:text-white transition" href="/about">About</a>
             <a className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium hover:bg-indigo-500 transition" href="/signin">{user ? user.username : "sign in"}</a>
             
