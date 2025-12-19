@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Layout from "../layouts/layout";
+import { post } from "../lib/api";
 
 export default function Quote() {
   const [symbol, setSymbol] = useState("");
@@ -14,10 +15,11 @@ export default function Quote() {
     setPrice(null);
 
     try {
-      const res = await fetch(`/price?symbol=${symbol}`, {
-        method: "POST",
-        credentials: "include",
-      });
+      // const res = await fetch(`/price?symbol=${symbol}`, {
+      //   method: "POST",
+      //   credentials: "include",
+      // });
+      res = await post(`/price?symbol=${symbol}`);
 
       const data = await res.json();
 
