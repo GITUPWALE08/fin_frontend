@@ -15,7 +15,7 @@ export default function Quote() {
 
     try {
       const res = await fetch(`/price?symbol=${symbol}`, {
-        method: "GET",
+        method: "POST",
         credentials: "include",
       });
 
