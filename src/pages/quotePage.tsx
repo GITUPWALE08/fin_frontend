@@ -19,7 +19,7 @@ export default function Quote() {
       //   method: "POST",
       //   credentials: "include",
       // });
-      const res = await post("/price", {symbol: symbol});
+      const res = await post("/price", {symbol});
 
       const data = await res.json();
 
