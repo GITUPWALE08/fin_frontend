@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../layouts/layout";
-import { post } from "../lib/api";
+// import { post } from "../lib/api";
+import { getPrice } from "../services/stocks";
 
 export default function Quote() {
   const [symbol, setSymbol] = useState("");
@@ -19,7 +20,7 @@ export default function Quote() {
       //   method: "POST",
       //   credentials: "include",
       // });
-      const res = await post("/price", {symbol});
+      const res = await getPrice(symbol);
 
       const data = await res.json();
 

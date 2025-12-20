@@ -4,7 +4,7 @@ import { useAuth } from "../state/authState";
 import QuoteModal from "../components/quoteModalPage";
 
 export default function Layout({ children }: PropsWithChildren<{}>) {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
   return (

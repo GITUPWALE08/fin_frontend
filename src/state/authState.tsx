@@ -6,7 +6,8 @@ import {
   type ReactNode,
 } from "react";
 // IMPORT YOUR API HELPER
-import { get, post } from "../lib/api";
+import { get } from "../lib/api";
+import { log_out } from "../services/auth";
 
 type AuthContextType = {
   user: { id: number; username: string } | null;
@@ -42,15 +43,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const logout = async () => {
-     try {
-       // USE 'post' helper
-       await post("/logout");
-
-       window.location.href = "/";
-     } catch (e) {
-       console.error(e);
-     }
-     setUser(null);
+    try {
+      await log_out(); // 1. Tell Backend to kill cookie
+    } catch (err) {
+      console.error("Logout failed on server, clearing local state anyway.");
+    }
+    setUser(null); // 2. Tell Frontend to clear user
+    window.location.href = "/login"; // 3. Force redirect to Login page
   };
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../layouts/layout";
 import type { JSX } from "react";
+import { buyStock } from "../services/stocks";
 
 export default function BuyPage(): JSX.Element {
   const [symbol, setSymbol] = useState("");
@@ -17,11 +18,13 @@ export default function BuyPage(): JSX.Element {
     setLoading(true);
 
     try {
-      const res = await fetch("/buy", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ symbol, shares, password }),
-      });
+      // const res = await fetch("/buy", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ symbol, shares, password }),
+      // });
+
+      const res = await buyStock(symbol, Number(shares), password);
 
       const data = await res.json();
 

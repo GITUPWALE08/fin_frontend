@@ -16,7 +16,8 @@ import { useAuth } from "./state/authState";
 
 function App() {
 //   const [count, setCount] = useState(0)
-  const { loading, user } = useAuth();
+  const { loading, user, logout } = useAuth();
+
 
   if (loading) {
     return (
@@ -33,6 +34,7 @@ function App() {
         {/* --- PUBLIC ROUTES --- */}
                 <Route path="/signin" element={!user ? <LoginPage /> : <Navigate to="/" />} />
                 <Route path="/signup" element={!user ? <Register /> : <Navigate to="/" />} />
+                <Route path="/logout " element={!user ? <Register /> : <Navigate to="/" />} />
                 
                 {/* Optional: If IndexPage is just a landing page for logged-out users */}
                 <Route path="/welcome" element={<IndexPage />} />

@@ -6,4 +6,4 @@ export const login = (username: string, password: string) =>
 export const register = (username: string, password: string, confirm: string) =>
   post("/register", { username, password, confirm });
 
-export const logout = () => post("/logout");
+export const log_out = () => post("/logout");
