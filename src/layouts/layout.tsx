@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { PropsWithChildren } from "react";
 import { useAuth } from "../state/authState";
 import QuoteModal from "../components/quoteModalPage";
+import { Link } from "react-router-dom";
 
 export default function Layout({ children }: PropsWithChildren<{}>) {
   const { user, logout } = useAuth();
@@ -33,7 +34,23 @@ export default function Layout({ children }: PropsWithChildren<{}>) {
                 Get Quote
               </button>
             <a className="text-slate-300 hover:text-white transition" href="/transactions">history</a>
-            <a className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium hover:bg-indigo-500 transition" href={user ? "/logout" : "/signup"}>{user ? "sign out" : "Sign Up"}</a>
+  
+            {user ? (
+            <button
+              className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium hover:bg-indigo-500 transition text-white"
+              onClick={logout}
+            >
+              Sign Out
+            </button>
+          ) : (
+            <Link
+              to="/signup"
+              className="rounded-md bg-indigo-600 px-3 py-1 text-sm font-medium hover:bg-indigo-500 transition text-white"
+            >
+              Sign Up
+            </Link>
+          )}
+
           </nav>
         </div>
       </header>
