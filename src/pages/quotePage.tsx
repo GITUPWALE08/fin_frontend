@@ -24,7 +24,7 @@ export default function Quote() {
   
     } catch (err: any) {
       // 3. Handle the error here
-      console.error(err);
+      setError(err);
       
       // Attempt to read the error message sent by Flask
       if (err.response && err.response.data && err.response.data.error) {
