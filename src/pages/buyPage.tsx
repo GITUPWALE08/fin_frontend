@@ -26,7 +26,7 @@ export default function BuyPage(): JSX.Element {
 
       const res = await buyStock(symbol, Number(shares), password);
 
-      const data = await res.json();
+      const data = await res.data;
 
       if (!res.ok) throw new Error(data.error || "Failed to buy stock.");
       setSuccess("Purchase completed successfully.");
