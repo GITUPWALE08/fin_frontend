@@ -22,7 +22,7 @@ export default function Quote() {
       // });
       const res = await getPrice(symbol);
 
-      const data = await res.json();
+      const data = await res;
 
       if (!res.ok) {
         setError(data.error || "Unable to fetch price");
@@ -41,7 +41,7 @@ export default function Quote() {
       <div className="max-w-md mx-auto bg-slate-900/40 p-6 rounded-xl border border-slate-800 shadow-xl">
         <h1 className="text-2xl font-bold text-center mb-6">Get Stock Quote</h1>
 
-        <form onSubmit={handleQuote} className="space-y-4">
+        <form className="space-y-4">
           <input
             type="text"
             required
@@ -53,7 +53,8 @@ export default function Quote() {
           />
 
           <button
-            type="submit"
+            type="button"
+            onClick={handleQuote}
             disabled={loading}
             className="w-full bg-indigo-600 hover:bg-indigo-500 transition px-4 py-2 rounded-lg font-semibold"
           >
