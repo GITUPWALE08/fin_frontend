@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../layouts/layout";
 import type { JSX } from "react";
+import { sellStock } from "../services/stocks";
 
 export default function SellPage(): JSX.Element {
   const [symbol, setSymbol] = useState("");
@@ -17,15 +18,15 @@ export default function SellPage(): JSX.Element {
     setLoading(true);
 
     try {
-      const res = await fetch("/sell", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ symbol, shares, password }),
-      });
+      // const res = await fetch("/sell", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ symbol, shares, password }),
+      // });
 
-      const data = await res.json();
+      const res = await sellStock(symbol, Number(shares), password);
 
-      if (!res.ok) throw new Error(data.error || "Failed to sell stock.");
+      if (!res.ok) throw new Error(res.error || "Failed to sell stock.");
       setSuccess("Purchase completed successfully.");
       setSymbol("");
       setShares("");

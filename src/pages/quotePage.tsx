@@ -14,25 +14,26 @@ export default function Quote() {
     setLoading(true);
     setError("");
     setPrice(null);
-
+  
     try {
-      // const res = await fetch(`/price?symbol=${symbol}`, {
-      //   method: "POST",
-      //   credentials: "include",
-      // });
-      const res = await getPrice(symbol);
-
-      const data = await res;
-
-      if (!res.ok) {
-        setError(data.error || "Unable to fetch price");
+      // 1. Call the API. If it fails (400/500), it jumps to 'catch' automatically.
+      const data = await getPrice(symbol);
+  
+      // 2. If we get here, it worked! 'data' is the JSON object.
+      setPrice(data.price); 
+  
+    } catch (err: any) {
+      // 3. Handle the error here
+      console.error(err);
+      
+      // Attempt to read the error message sent by Flask
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
       } else {
-        setPrice(data.price);
+        setError("Network error or Invalid symbol.");
       }
-    } catch {
-      setError("Network error. Please try again.");
     }
-
+  
     setLoading(false);
   };
 
