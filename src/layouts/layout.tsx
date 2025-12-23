@@ -13,13 +13,13 @@ export default function Layout({ children }: PropsWithChildren<{}>) {
 
   return (
     // Note: 'bg-linear-to-b00' looks like a typo, assuming 'bg-gradient-to-b' or custom class
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 text-slate-100">
+    <div className="min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-950 text-slate-100">
       <header className="sticky top-0 z-50 backdrop-blur-sm bg-black/30 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
           
           {/* Logo Section */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-500 to-sky-400 flex items-center justify-center text-xl font-bold">
+            <div className="w-10 h-10 rounded-lg bg-linear-to-r from-indigo-500 to-sky-400 flex items-center justify-center text-xl font-bold">
               E
             </div>
             <div>
