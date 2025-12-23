@@ -80,6 +80,10 @@ export default function Register() {
         {error && (
           <p className="text-red-400 text-sm mt-4 text-center">{error}</p>
         )}
+
+        <div className="mt-5 text-sm text-slate-400 text-center">
+          Already have an account? <a className="text-indigo-400 underline" href="/signin">Login</a>
+        </div>
       </div>
     </Layout>
   );
