@@ -197,7 +197,7 @@ export default function PortfolioPage() {
           </div>
 
           <div className="p-6 border-b border-slate-800 flex justify-between items-end">
-            <Link to="/sell" className="text-xs font-semibold text-red-400 bg-red-900/10 px-2 py-1 rounded hover:bg-red-900/30 transition opacity-50 group-hover:opacity-100">
+            <Link to="/sell" className="text-xs font-semibold text-red-400 bg-indigo-600 px-2 py-1 rounded hover:bg-red-900/30 transition opacity-50 group-hover:opacity-100">
               SELL
             </Link>
           </div>
