@@ -26,7 +26,7 @@ export default function SellPage(): JSX.Element {
 
       const res = await sellStock(symbol, Number(shares), password);
 
-      if (!res.ok) throw new Error(res.error || "Failed to sell stock.");
+      if (res.error) throw new Error(res.error || "Failed to sell stock.");
       setSuccess("Purchase completed successfully.");
       setSymbol("");
       setShares("");
