@@ -17,7 +17,11 @@ export default function Quote() {
   
     try {
       // 1. Call the API. If it fails (400/500), it jumps to 'catch' automatically.
-      const data = await getPrice(symbol);
+      // const data = await getPrice(symbol);
+      const data = await fetch(`/price?symbol=${symbol}`, {
+        method: "GET",
+        credentials: "include",
+      });
   
       // 2. If we get here, it worked! 'data' is the JSON object.
       setPrice(data.price); 
