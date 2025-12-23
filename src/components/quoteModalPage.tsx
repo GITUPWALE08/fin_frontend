@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getPrice } from "../services/stocks";
 
 type Props = {
   isOpen: boolean;
@@ -21,21 +22,23 @@ export default function QuoteModal({ isOpen, onClose }: Props) {
 
     try {
       // Use the POST route defined in app.py
-      const res = await fetch("/quote", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ symbol }),
-      });
+      const data = await getPrice(symbol);
 
-      const data = await res.json();
+      // const data = await res.json();
 
-      if (!res.ok) {
+      if (data.ok) {
         setError(data.error || "Invalid symbol");
       } else {
         setResult(data);
       }
-    } catch (err) {
-      setError("Network error. Please try again.");
+    } catch (err: any) {
+      setError(err);
+
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else {
+        setError("Network error or Invalid symbol.");
+      }
     } finally {
       setLoading(false);
     }
