@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       console.error("Logout failed on server, clearing local state anyway.");
     }
     setUser(null); // 2. Tell Frontend to clear user
-    window.location.href = "/signin"; // 3. Force redirect to Login page
+    // window.location.href = "/signin"; 3. Force redirect to Login page
   };
 
   return (
