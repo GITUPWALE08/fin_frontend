@@ -7,4 +7,4 @@ export const buyStock = (symbol: string, shares: number, password: string) =>
   post("/buy", { symbol, shares, password });
 
 export const sellStock = (symbol: string, shares: number, password: string) =>
-  post("/buy", { symbol, shares, password });
+  post("/sell", { symbol, shares, password });

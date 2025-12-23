@@ -26,7 +26,7 @@ export default function QuoteModal({ isOpen, onClose }: Props) {
 
       // const data = await res.json();
 
-      if (data.ok) {
+      if (data.error) {
         setError(data.error || "Invalid symbol");
       } else {
         setResult(data);
